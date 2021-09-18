@@ -1,5 +1,5 @@
 import Navigation from "../Navigation/Navigation";
-import { Container } from "./App.styled";
+import { Container } from "../../views/styled/App.styled";
 import { Route, Switch } from "react-router";
 import Homepage from "../../views/Homapage";
 import Moviespage from "../../views/Moviespage";

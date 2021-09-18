@@ -1,4 +1,4 @@
-import { Actor, Actors } from "./FilmCasts.styled";
+import { Actor, Actors } from "../../views/styled/FilmCasts.styled";
 
 export default function FilmCasts({ casts }) {
   return (

@@ -1,5 +1,5 @@
 import { FilmPoster } from "../../views/styled/Homepage.styled";
-import { FilmContainer, ImgThumb } from "./FilmInfostyled";
+import { FilmContainer, ImgThumb } from "../../views/styled/FilmInfostyled";
 
 export default function FilmInfo({ film }) {
   const { title, vote_average, overview, genres, release_date, poster_path } =

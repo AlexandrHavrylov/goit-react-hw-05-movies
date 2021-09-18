@@ -1,4 +1,4 @@
-import { ReviewsList } from "./FilmReviews.styled";
+import { ReviewsList } from "../../views/styled/FilmReviews.styled";
 
 export default function FilmReviews({ reviews }) {
   return (
