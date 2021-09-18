@@ -9,7 +9,7 @@ import {
 
 import { Route, useRouteMatch } from "react-router";
 import FilmCasts from "../components/FilmSubInfo/FilmCasts";
-import { StyledLink } from "./styled/Homepage.styled";
+import { StyledLink } from "../styled/Homepage.styled";
 import FilmReviews from "../components/FilmSubInfo/FilmReviews";
 
 export default function Filmpage() {

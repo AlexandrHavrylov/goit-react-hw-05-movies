@@ -2,7 +2,7 @@ import SearchInput from "../components/SearchInput/SearchInput";
 import { useState, useEffect } from "react";
 import { fetchByQuery } from "../servises/films-api";
 import { useRouteMatch } from "react-router-dom";
-import { StyledLink, Film, FilmPoster, Films } from "./styled/Homepage.styled";
+import { StyledLink, Film, FilmPoster, Films } from "../styled/Homepage.styled";
 
 export default function Moviespage() {
   const [query, setQuery] = useState("");

@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  SearchForm,
-  Button,
-  Input,
-} from "../../views/styled/SearchInput.styled";
+import { SearchForm, Button, Input } from "../../styled/SearchInput.styled";
 
 export default function SearchInput({ onSubmit }) {
   const [query, setQuery] = useState("");

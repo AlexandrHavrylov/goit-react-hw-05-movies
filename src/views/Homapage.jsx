@@ -1,6 +1,6 @@
 import { fetchPopularFilms } from "../servises/films-api";
 import { useState, useEffect } from "react";
-import { Films, Film, FilmPoster, StyledLink } from "./styled/Homepage.styled";
+import { Films, Film, FilmPoster, StyledLink } from "../styled/Homepage.styled";
 
 export default function Homepage() {
   const [films, setFilms] = useState([]);

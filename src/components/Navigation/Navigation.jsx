@@ -1,4 +1,4 @@
-import { Header, StyledNavLink } from "../../views/styled/Navigation.styled";
+import { Header, StyledNavLink } from "../../styled/Navigation.styled";
 
 const Navigation = () => {
   return (
