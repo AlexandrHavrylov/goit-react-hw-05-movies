@@ -1,7 +1,6 @@
 import { fetchPopularFilms } from "../servises/films-api";
 import { useState, useEffect } from "react";
-import { Films, Film, FilmPoster } from "./styled/Homepage.styled";
-import { Link } from "react-router-dom";
+import { Films, Film, FilmPoster, StyledLink } from "./styled/Homepage.styled";
 
 export default function Homepage() {
   const [films, setFilms] = useState([]);
@@ -20,14 +19,14 @@ export default function Homepage() {
       <Films>
         {films.map((film) => (
           <Film key={film.id}>
-            <Link to={`/${film.id}`}>
+            <StyledLink to={`movies/${film.id}`}>
               <FilmPoster
                 src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
-                alt=""
+                alt={film.name}
                 width="150px"
               />
               <p>{film.title}</p>
-            </Link>
+            </StyledLink>
           </Film>
         ))}
       </Films>

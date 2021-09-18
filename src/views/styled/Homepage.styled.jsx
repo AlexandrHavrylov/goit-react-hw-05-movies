@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 export const Films = styled.ul`
   display: flex;
@@ -18,4 +19,9 @@ export const Film = styled.li`
 
 export const FilmPoster = styled.img`
   width: 100%;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;

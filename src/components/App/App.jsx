@@ -14,10 +14,10 @@ export function App() {
         <Route path="/" exact>
           <Homepage />
         </Route>
-        <Route path="/movies">
+        <Route path="/movies" exact>
           <Moviespage />
         </Route>
-        <Route path="/:filmId">
+        <Route path="/movies/:filmId">
           <Filmpage />
         </Route>
       </Switch>
