@@ -39,7 +39,7 @@ export default function Moviespage() {
     return (
       <>
         <SearchInput />
-        <ToastContainer />;
+        <ToastContainer />
         <Films>
           {films.map((film) => (
             <Film key={film.id}>
