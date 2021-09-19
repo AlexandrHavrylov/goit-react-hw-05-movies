@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import { Actor, Actors } from "../../styled/FilmCasts.styled";
 
 export default function FilmCasts({ casts }) {
+  useEffect(() => {
+    window.scrollTo({
+      top: 500,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <Actors>
       {casts.map((cast) => (

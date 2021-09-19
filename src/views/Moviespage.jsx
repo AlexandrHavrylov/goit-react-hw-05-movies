@@ -2,39 +2,69 @@ import SearchInput from "../components/SearchInput/SearchInput";
 import { useState, useEffect } from "react";
 import { fetchByQuery } from "../servises/films-api";
 import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router";
 import { StyledLink, Film, FilmPoster, Films } from "../styled/Homepage.styled";
+import { toast, ToastContainer } from "react-toastify";
+import { StyledLoader } from "../styled/App.styled";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Moviespage() {
-  const [query, setQuery] = useState("");
   const [films, setFilms] = useState([]);
+  const [status, setStatus] = useState("idle");
 
+  const location = useLocation();
   const { url } = useRouteMatch();
+  const query = new URLSearchParams(location.search).get("query");
+
   useEffect(() => {
     const fetch = async () => {
-      if (query.trim()) {
-        const films = await fetchByQuery(query);
-        setFilms(films);
+      try {
+        if (query) {
+          setStatus("pending");
+          const films = await fetchByQuery(query);
+          setFilms(films);
+          setStatus("resolved");
+          if (films.length === 0) {
+            throw new Error();
+          }
+        }
+      } catch {
+        setStatus("rejected");
+        toast.error("Сan't find such a movie");
       }
     };
     fetch();
   }, [query]);
 
-  return (
-    <>
-      <SearchInput onSubmit={setQuery} />
-      <Films>
-        {films.map((film) => (
-          <Film key={film.id}>
-            <StyledLink to={`${url}/${film.id}`}>
-              <FilmPoster
-                src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
-                alt={film.title}
-              />
-              <p>{film.title}</p>
-            </StyledLink>
-          </Film>
-        ))}
-      </Films>
-    </>
-  );
+  if (status === "idle" || status === "resolved") {
+    return (
+      <>
+        <SearchInput />
+        <Films>
+          {films.map((film) => (
+            <Film key={film.id}>
+              <StyledLink to={`${url}/${film.id}`}>
+                <FilmPoster
+                  src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
+                  alt={film.title}
+                  onError={(e) => {
+                    e.target.src =
+                      "https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-600w-1350441335.jpg";
+                  }}
+                />
+                <p>{film.title}</p>
+              </StyledLink>
+            </Film>
+          ))}
+        </Films>
+      </>
+    );
+  }
+
+  if (status === "rejected") {
+    return <ToastContainer />;
+  }
+  if (status === "pending") {
+    return <StyledLoader type="ThreeDots" color="gray" />;
+  }
 }

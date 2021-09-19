@@ -24,4 +24,9 @@ export const FilmPoster = styled.img`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
+
+  span {
+    margin-right: 10px;
+    padding: 24px;
+  }
 `;

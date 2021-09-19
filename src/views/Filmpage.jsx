@@ -36,8 +36,12 @@ export default function Filmpage() {
     <>
       <FilmInfo film={film} />
       <div>
-        <StyledLink to={`${url}/cast`}>Cast</StyledLink>
-        <StyledLink to={`${url}/reviews`}>Reviews</StyledLink>
+        <StyledLink to={`${url}/cast`}>
+          <span>Cast</span>{" "}
+        </StyledLink>
+        <StyledLink to={`${url}/reviews`}>
+          <span>Reviews</span>{" "}
+        </StyledLink>
       </div>
       <Route path={`${url}/cast`}>
         <FilmCasts casts={casts} />

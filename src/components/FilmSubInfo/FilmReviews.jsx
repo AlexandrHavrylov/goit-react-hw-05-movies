@@ -1,6 +1,14 @@
 import { ReviewsList } from "../../styled/FilmReviews.styled";
+import { useEffect } from "react";
 
 export default function FilmReviews({ reviews }) {
+  useEffect(() => {
+    reviews &&
+      window.scrollTo({
+        top: 500,
+        behavior: "smooth",
+      });
+  }, [reviews]);
   return (
     <>
       {reviews.length > 0 ? (

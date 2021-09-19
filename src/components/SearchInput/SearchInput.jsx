@@ -1,13 +1,20 @@
 import { useState } from "react";
+import { useLocation, useHistory } from "react-router";
 import { SearchForm, Button, Input } from "../../styled/SearchInput.styled";
 
-export default function SearchInput({ onSubmit }) {
+export default function SearchInput() {
   const [query, setQuery] = useState("");
+
+  const history = useHistory();
+  const location = useLocation();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit(query);
-    setQuery("");
+    query.trim() &&
+      history.push({
+        ...location,
+        search: `query=${query}`,
+      });
   };
 
   return (
