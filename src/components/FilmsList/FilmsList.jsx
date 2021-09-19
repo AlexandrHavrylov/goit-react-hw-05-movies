@@ -24,6 +24,10 @@ export default function FilmsList() {
                 src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
                 alt=""
                 width="150px"
+                onError={(e) => {
+                  e.target.src =
+                    "https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-600w-1350441335.jpg";
+                }}
               />
               <p>{film.title}</p>
             </Link>
