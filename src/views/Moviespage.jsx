@@ -29,7 +29,6 @@ export default function Moviespage() {
           }
         }
       } catch {
-        setStatus("rejected");
         toast.error("Сan't find such a movie");
       }
     };
@@ -40,6 +39,7 @@ export default function Moviespage() {
     return (
       <>
         <SearchInput />
+        <ToastContainer />;
         <Films>
           {films.map((film) => (
             <Film key={film.id}>
@@ -61,9 +61,6 @@ export default function Moviespage() {
     );
   }
 
-  if (status === "rejected") {
-    return <ToastContainer />;
-  }
   if (status === "pending") {
     return <StyledLoader type="ThreeDots" color="gray" />;
   }
