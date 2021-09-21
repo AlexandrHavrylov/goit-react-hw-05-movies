@@ -1,14 +1,16 @@
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import { fetchCredits } from "../../servises/films-api";
 import { Actor, Actors } from "../../styled/FilmCasts.styled";
 
-export default function FilmCasts({ casts }) {
+export default function FilmCasts({ id }) {
+  const [casts, setCast] = useState([]);
   useEffect(() => {
-    window.scrollTo({
-      top: 500,
-      behavior: "smooth",
-    });
-  }, []);
+    const fetch = async () => {
+      const casts = await fetchCredits(id);
+      setCast(casts);
+    };
+    fetch();
+  }, [id]);
 
   return (
     <Actors>

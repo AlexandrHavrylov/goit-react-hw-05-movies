@@ -1,14 +1,18 @@
 import { ReviewsList } from "../../styled/FilmReviews.styled";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { fetchRewies } from "../../servises/films-api";
 
-export default function FilmReviews({ reviews }) {
+export default function FilmReviews({ id }) {
+  const [reviews, setReviews] = useState([]);
+
   useEffect(() => {
-    reviews &&
-      window.scrollTo({
-        top: 500,
-        behavior: "smooth",
-      });
-  }, [reviews]);
+    const fetch = async () => {
+      const reviews = await fetchRewies(id);
+      setReviews(reviews);
+    };
+    fetch();
+  }, [id]);
+
   return (
     <>
       {reviews.length > 0 ? (

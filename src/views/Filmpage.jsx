@@ -1,12 +1,7 @@
 import FilmInfo from "../components/Filminfo/FilmInfo";
 import { useHistory, useLocation, useParams } from "react-router";
 import { useState, useEffect } from "react";
-import {
-  fetchFilmById,
-  fetchCredits,
-  fetchRewies,
-} from "../servises/films-api";
-
+import { fetchFilmById } from "../servises/films-api";
 import { ImArrowLeft } from "react-icons/im";
 import { Route, useRouteMatch } from "react-router";
 import FilmCasts from "../components/FilmSubInfo/FilmCasts";
@@ -16,35 +11,29 @@ import { BackButton } from "../styled/FilmInfostyled";
 
 export default function Filmpage() {
   const [film, setFilm] = useState("");
-  const [casts, setCast] = useState([]);
-  const [reviews, setReviews] = useState([]);
-
   const { url } = useRouteMatch();
   const { filmId } = useParams();
 
   useEffect(() => {
     const fetch = async () => {
       const film = await fetchFilmById(filmId);
-      const casts = await fetchCredits(filmId);
-      const reviews = await fetchRewies(filmId);
       setFilm(film);
-      setCast(casts);
-      setReviews(reviews);
     };
     fetch();
   }, [filmId]);
-
+  const history = useHistory();
   const location = useLocation();
-  console.log(location);
+
+  const handleBackClick = () => {
+    history.push(location.state?.from ? location.state?.from : "/");
+  };
 
   return (
     <>
-      <StyledLink to={location?.state?.from ?? "/"}>
-        <BackButton>
-          <ImArrowLeft />
-          Go back
-        </BackButton>
-      </StyledLink>
+      <BackButton onClick={handleBackClick}>
+        <ImArrowLeft />
+        Go back
+      </BackButton>
 
       <FilmInfo film={film} />
       <div>
@@ -60,7 +49,7 @@ export default function Filmpage() {
         </StyledLink>
         <StyledLink
           to={{
-            pathname: `${url}/rewievs`,
+            pathname: `${url}/reviews`,
             state: {
               from: location?.state?.from ?? "/",
             },
@@ -70,10 +59,10 @@ export default function Filmpage() {
         </StyledLink>
       </div>
       <Route path={`${url}/cast`}>
-        <FilmCasts casts={casts} />
+        <FilmCasts id={filmId} />
       </Route>
       <Route path={`${url}/reviews`}>
-        <FilmReviews reviews={reviews} />
+        <FilmReviews id={filmId} />
       </Route>
     </>
   );
