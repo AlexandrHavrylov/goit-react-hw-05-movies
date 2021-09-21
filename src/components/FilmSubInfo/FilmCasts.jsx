@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { Actor, Actors } from "../../styled/FilmCasts.styled";
 
 export default function FilmCasts({ casts }) {
@@ -8,6 +9,7 @@ export default function FilmCasts({ casts }) {
       behavior: "smooth",
     });
   }, []);
+
   return (
     <Actors>
       {casts.map((cast) => (

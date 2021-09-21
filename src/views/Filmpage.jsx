@@ -1,5 +1,5 @@
 import FilmInfo from "../components/Filminfo/FilmInfo";
-import { useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 import { useState, useEffect } from "react";
 import {
   fetchFilmById,
@@ -7,10 +7,12 @@ import {
   fetchRewies,
 } from "../servises/films-api";
 
+import { ImArrowLeft } from "react-icons/im";
 import { Route, useRouteMatch } from "react-router";
 import FilmCasts from "../components/FilmSubInfo/FilmCasts";
 import { StyledLink } from "../styled/Homepage.styled";
 import FilmReviews from "../components/FilmSubInfo/FilmReviews";
+import { BackButton } from "../styled/FilmInfostyled";
 
 export default function Filmpage() {
   const [film, setFilm] = useState("");
@@ -32,14 +34,38 @@ export default function Filmpage() {
     fetch();
   }, [filmId]);
 
+  const location = useLocation();
+  console.log(location);
+
   return (
     <>
+      <StyledLink to={location?.state?.from ?? "/"}>
+        <BackButton>
+          <ImArrowLeft />
+          Go back
+        </BackButton>
+      </StyledLink>
+
       <FilmInfo film={film} />
       <div>
-        <StyledLink to={`${url}/cast`}>
+        <StyledLink
+          to={{
+            pathname: `${url}/cast`,
+            state: {
+              from: location?.state?.from ?? "/",
+            },
+          }}
+        >
           <span>Cast</span>{" "}
         </StyledLink>
-        <StyledLink to={`${url}/reviews`}>
+        <StyledLink
+          to={{
+            pathname: `${url}/rewievs`,
+            state: {
+              from: location?.state?.from ?? "/",
+            },
+          }}
+        >
           <span>Reviews</span>{" "}
         </StyledLink>
       </div>

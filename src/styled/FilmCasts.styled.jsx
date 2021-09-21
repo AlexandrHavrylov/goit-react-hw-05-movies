@@ -17,8 +17,6 @@ export const Actor = styled.li`
   }
 
   p {
-    :first-child {
-      margin-bottom: 65px;
-    }
+    margin-bottom: 65px;
   }
 `;

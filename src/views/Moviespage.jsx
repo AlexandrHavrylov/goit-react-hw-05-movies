@@ -43,7 +43,14 @@ export default function Moviespage() {
         <Films>
           {films.map((film) => (
             <Film key={film.id}>
-              <StyledLink to={`${url}/${film.id}`}>
+              <StyledLink
+                to={{
+                  pathname: `${url}/${film.id}`,
+                  state: {
+                    from: `${url}?query=${query}`,
+                  },
+                }}
+              >
                 <FilmPoster
                   src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
                   alt={film.title}
