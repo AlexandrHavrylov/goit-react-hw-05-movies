@@ -4,6 +4,15 @@ import { Actor, Actors } from "../../styled/FilmCasts.styled";
 
 export default function FilmCasts({ id }) {
   const [casts, setCast] = useState([]);
+
+  useEffect(() => {
+    casts.length > 0 &&
+      window.scrollTo({
+        top: 500,
+        behavior: "smooth",
+      });
+  }, [casts.length]);
+
   useEffect(() => {
     const fetch = async () => {
       const casts = await fetchCredits(id);

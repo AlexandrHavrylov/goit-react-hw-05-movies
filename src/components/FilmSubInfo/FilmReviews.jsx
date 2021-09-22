@@ -6,6 +6,14 @@ export default function FilmReviews({ id }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    reviews.length > 0 &&
+      window.scrollTo({
+        top: 500,
+        behavior: "smooth",
+      });
+  }, [reviews.length]);
+
+  useEffect(() => {
     const fetch = async () => {
       const reviews = await fetchRewies(id);
       setReviews(reviews);
